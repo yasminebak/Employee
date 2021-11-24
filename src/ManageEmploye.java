@@ -22,14 +22,13 @@ public class ManageEmploye extends UnicastRemoteObject implements IManageEmploye
 	}
 
 	@Override
-	public void addEmploye(int id, String password, String lastname, String firstname, String birthday)
+	public void addEmploye(int id, String password, String lastname, String firstname)
 			throws RemoteException {
 		Objects.requireNonNull(password);
 		Objects.requireNonNull(lastname);
 		Objects.requireNonNull(firstname);
-		Objects.requireNonNull(birthday);
 
-		Employe e = new Employe(id, password, lastname, firstname, birthday);
+		Employe e = new Employe(id, password, lastname, firstname);
 		employes.put(id, e);
 	}
 
@@ -61,6 +60,13 @@ public class ManageEmploye extends UnicastRemoteObject implements IManageEmploye
 			return employes.get(id);
 		}
 		return null;
+	}
+
+	@Override
+	public boolean login(int id, String password) throws RemoteException {
+		if(!existEmploye(id)) return false;
+		if(!getEmploye(id).verifIdentity(password)) return false;
+		return true;
 	}
 
 }
