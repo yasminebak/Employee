@@ -63,10 +63,10 @@ public class ManageEmploye extends UnicastRemoteObject implements IManageEmploye
 	}
 
 	@Override
-	public boolean login(int id, String password) throws RemoteException {
-		if(!existEmploye(id)) return false;
-		if(!getEmploye(id).verifIdentity(password)) return false;
-		return true;
+	public IEmploye login(int id, String password) throws RemoteException {
+		if(!existEmploye(id)) return null;
+		if(!getEmploye(id).verifIdentity(password)) return null;
+		return employes.get(id);
 	}
 
 }

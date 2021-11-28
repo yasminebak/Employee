@@ -9,7 +9,8 @@ public class Employe extends UnicastRemoteObject implements IEmploye {
 	private String password;
 	private String lastname;
 	private String firstname;
-
+	private String idProduct;
+	
 	public Employe() throws RemoteException {
 
 	}
@@ -62,4 +63,10 @@ public class Employe extends UnicastRemoteObject implements IEmploye {
 	public String toString() {
 		return "ID : " + id + " Lastname : " + lastname + " Firstname : " + firstname;
 	}
+
+	@Override
+	public void notifyEmployee(String idProduct) throws RemoteException {
+		System.out.println("this is the new product "+ idProduct);
+	}
+
 }
